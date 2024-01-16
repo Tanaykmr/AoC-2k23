@@ -1,121 +1,401 @@
+// need to understand the custom comparator properly
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <regex>
+#include <vector>
+#include <utility>
+#include <algorithm>
+#include <limits.h>
 using namespace std;
+vector<pair<int, int>> occurences;
 
-string findAndReplaceNumbers(const string &input)
+// findFirst returns a pair<int index, int number-located-there>;
+int findFirstDigit(string currentLine)
 {
-    regex one("one");
-    regex eight("eight");
-    regex two("two");
-    regex three("three");
-    regex four("four");
-    regex five("five");
-    regex six("six");
-    regex seven("seven");
-    regex nine("nine");
+    occurences.clear();
+    cout << "currentLine.length(): " << currentLine.length() << endl;
+    int indexToTrack = currentLine.length() + 1;
 
-    // Add more regex patterns for other substrings as needed
+    // 1
+    string toFind = "one";
+    int index = currentLine.find(toFind);
+    cout << "\tfound, index of one: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << toFind + " is not here" << endl;
+    }
+    else // multiple occurences are there
+    {
 
-    string result = regex_replace(input, one, "1");
-    result = regex_replace(result, two, "2");
-    result = regex_replace(result, three, "3");
-    result = regex_replace(result, four, "4");
-    result = regex_replace(result, five, "5");
-    result = regex_replace(result, six, "6");
-    result = regex_replace(result, seven, "7");
-    result = regex_replace(result, eight, "8");
-    result = regex_replace(result, nine, "9");
-    // Use regex_replace for other patterns as well
+        while (index != string::npos && index < indexToTrack - 3)
+        {
+            cout << "   \t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 1));
+            index = currentLine.find(toFind, index + 3); // "one" can only occur 3 indexes after "index"
+        }
+    }
+    // 2
+    toFind = "two";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of two: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "two is not here" << std::endl;
+    }
+    else
+    {
+        while (index != string::npos && index < indexToTrack - 3)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 2));
+            index = currentLine.find(toFind, index + 3);
+        }
+    }
+    // 3
+    toFind = "three";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of three: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "three is not here" << std::endl;
+    }
+    else
+    {
 
-    return result;
+        while (index != string::npos && index < indexToTrack - 5)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 3));
+            index = currentLine.find(toFind, index + 5);
+        }
+    }
+    // 4
+    toFind = "four";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of four: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "four is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 4)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 4));
+            index = currentLine.find(toFind, index + 4);
+        }
+    }
+    // 5
+    toFind = "five";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of five: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "five is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 4)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 5));
+            index = currentLine.find(toFind, index + 4);
+        }
+    }
+    // 6
+    toFind = "six";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of six: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "six is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 3)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 6));
+            index = currentLine.find(toFind, index + 3);
+        }
+    }
+    // 7
+    toFind = "seven";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of seven: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "seven is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 5)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 7));
+            index = currentLine.find(toFind, index + 5);
+        }
+    }
+    // 8
+    toFind = "eight";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of eight: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "eight is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 5)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 8));
+            index = currentLine.find(toFind, index + 5);
+        }
+    }
+    // 9
+    toFind = "nine";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of nine: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "nine is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 4)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 9));
+            index = currentLine.find(toFind, index + 4);
+        }
+    }
+    // nums 0-9:
+
+    // 1
+
+    toFind = "1";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of 1: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "1 is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 1)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 1));
+            index = currentLine.find(toFind, index + 1);
+        }
+    }
+    // 2
+    toFind = "2";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of 2: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "\t\tindexbeinginspected: " << index << endl;
+        cout << "2 is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 1)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 2));
+            index = currentLine.find(toFind, index + 1);
+        }
+    }
+    // 3
+
+    toFind = "3";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of 3: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "3 is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 1)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 3));
+            index = currentLine.find(toFind, index + 1);
+        }
+    }
+    // 4
+    toFind = "4";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of 4: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "4 is not here" << std::endl;
+    }
+    else
+    {
+        while (index != string::npos && index < indexToTrack - 1)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 4));
+            index = currentLine.find(toFind, index + 1);
+        }
+    }
+    // 5
+    toFind = "5";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of 5: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "5 is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 1)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 5));
+            index = currentLine.find(toFind, index + 1);
+        }
+    }
+    // 6
+    toFind = "6";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of 6: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "6 is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 1)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 6));
+            index = currentLine.find(toFind, index + 1);
+        }
+    }
+    // 7
+    toFind = "7";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of 7: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "7 is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 1)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 7));
+            index = currentLine.find(toFind, index + 1);
+        }
+    }
+    // 8
+    toFind = "8";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of 8: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "8 is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 1)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 8));
+            index = currentLine.find(toFind, index + 1);
+        }
+    }
+    // 9
+    toFind = "9";
+    index = currentLine.find(toFind);
+    cout << "\tfound, index of 9: " << index << endl;
+    if (index == string::npos)
+    {
+        cout << "9 is not here" << std::endl;
+    }
+    else
+    {
+
+        while (index != string::npos && index < indexToTrack - 1)
+        {
+            cout << "\t\tindexbeinginspected: " << index << endl;
+            occurences.push_back(make_pair(index, 9));
+            index = currentLine.find(toFind, index + 1);
+        }
+    }
+    for (int i = 0; i < occurences.size(); i++)
+    {
+        cout << "occurences[" << i << "]: "
+             << "<" << occurences[i].first << ", " << occurences[i].second << ">" << endl;
+    }
+    auto firstNumber = min_element(occurences.begin(), occurences.end(),
+                                   [](const pair<int, int> &lhs, const pair<int, int> &rhs)
+                                   {
+                                       return lhs.first < rhs.first;
+                                   }); // finds the pair with the min pair.first(pair.first is the index);
+    return (firstNumber->second);      // returns the number located at the index
+}
+
+int findSecondDigit()
+{
+    auto secondNumber = max_element(occurences.begin(), occurences.end(),
+                                    [](const pair<int, int> &lhs, const pair<int, int> &rhs)
+                                    { return lhs.first < rhs.first; }); // finds the pair with the max pair.first(pair.first is the index);
+    return (secondNumber->second);                                      // returns the number located at the index
 }
 
 int main()
 {
-    ifstream inputfile1("data.txt"); // Replace "yourfile.txt" with your actual file name
-    if (!inputfile1)
-    {
-        cerr << "Error opening the file!" << endl;
-        return 1;
-    }
+    fstream inputFile("data-copy.txt");
 
     string currentLine;
-    string modifiedContent;
+    int totalCount = 0, lineCount = 0, count = 0;
 
-    while (getline(inputfile1, currentLine))
+    if (inputFile.is_open())
     {
-        cout << "currentLine: " << currentLine << endl;
-        modifiedContent += findAndReplaceNumbers(currentLine) + "\n";
-        cout << "modifiedContent " << modifiedContent << endl;
-    }
-
-    inputfile1.close();
-
-    ofstream outputFile("output.txt"); // Replace "output.txt" with your desired output file name
-
-    if (!outputFile)
-    {
-        cerr << "Error creating the output file!" << endl;
-        return 1;
-    }
-
-    outputFile << modifiedContent;
-
-    cout << "Replacement completed successfully." << endl;
-    // cout << "Current line is: " << currentLine << endl;
-    // currentLine.clear();
-    // cout << "Current line is: " << currentLine << endl;
-    cout << "starting calculation" << endl;
-
-    ifstream inputfile2("output.txt");
-    string currentLine2;
-    int count = 1, currentCount = 0;
-    if (!inputfile2)
-    {
-        cerr << "Error opening the file 2!" << endl;
-        return 1;
-    }
-
-    while (getline(inputfile2, currentLine2))
-    {
-        cout << "hello from inside the while loop" << endl;
-        cout << "Traversing line: " << count << endl;
-        cout << "Current line is: " << currentLine2 << endl;
-
-        int firstDigit = 0, secondDigit = 0, digitCount = 1;
-        // we find the first and second digit
-        if (inputfile2.is_open())
+        while (getline(inputFile, currentLine))
         {
-            for (char currentChar : currentLine2)
-            {
-                cout << "Analyzing character: " << currentChar << endl;
-                if (currentChar >= '0' && currentChar <= '9')
-                {
-                    if (digitCount == 1)
-                    {
-                        firstDigit = currentChar - '0';
-                        digitCount++;
-                    }
-                    else
-                    {
-                        secondDigit = currentChar - '0';
-                        digitCount++;
-                    }
-                }
-            }
-            cout << "firstDigit= " << firstDigit << " secondDigit= " << secondDigit << endl;
-            cout << "digitCount: " << digitCount << endl;
-            cout << "lineCount: " << ((digitCount != 2) ? (10 * firstDigit + secondDigit) : (11 * firstDigit)) << endl;
-            currentCount += (digitCount != 2) ? (10 * firstDigit + secondDigit) : (11 * firstDigit);
-            cout << "currentCount: " << currentCount << endl;
+            cout << "traversing line: " << count << endl;
+            lineCount = 0;
+            int firstDigit = findFirstDigit(currentLine);
+            int secondDigit = findSecondDigit();
+            cout << "firstDigit: " << firstDigit << endl;
+            cout << "secondDigit: " << secondDigit << endl;
+            lineCount = (10 * firstDigit) + secondDigit;
+            cout << "lineCount: " << lineCount << endl;
+            totalCount += lineCount;
+            cout << "totalCount: " << totalCount << endl;
             count++;
         }
     }
+    else
+    {
+        cerr << "Error opening the file." << endl;
+        return 1; // Return an error code
+    }
 
-    inputfile2.close();
+    inputFile.close();
+    cout << "ANSWER IS: " << totalCount << endl;
 
-    cout << "ANSWER IS: " << currentCount << endl;
-    return 0;
+    return 0; // Indicate successful execution
 }
